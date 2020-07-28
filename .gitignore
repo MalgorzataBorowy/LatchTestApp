@@ -1,0 +1,6 @@
+.vs/
+LatchApp/bin
+LatchApp/obj
+LatchApp/Properties
+LatchApp/connString.txt
+LatchApp/App.config
