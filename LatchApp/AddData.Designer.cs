@@ -485,7 +485,7 @@
             // 
             // btnLatchAdd
             // 
-            this.btnLatchAdd.Location = new System.Drawing.Point(158, 12);
+            this.btnLatchAdd.Location = new System.Drawing.Point(158, 13);
             this.btnLatchAdd.Name = "btnLatchAdd";
             this.btnLatchAdd.Size = new System.Drawing.Size(129, 44);
             this.btnLatchAdd.TabIndex = 3;
