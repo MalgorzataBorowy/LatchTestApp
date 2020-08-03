@@ -20,7 +20,7 @@ namespace LatchApp
 
         private void BtnConfirmLogin_Click (object sender, EventArgs e)
         {            
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connStringLogin))
+            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
             {
                 using (MySqlCommand command = new MySqlCommand())
                 {

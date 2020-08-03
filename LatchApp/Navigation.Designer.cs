@@ -65,7 +65,7 @@
             // 
             // btn_Exit
             // 
-            this.btn_Exit.Location = new System.Drawing.Point(196, 230);
+            this.btn_Exit.Location = new System.Drawing.Point(159, 235);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(85, 30);
             this.btn_Exit.TabIndex = 3;
@@ -77,13 +77,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 272);
+            this.ClientSize = new System.Drawing.Size(256, 277);
             this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.btn_ViewData);
             this.Controls.Add(this.btn_AddData);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(274, 324);
+            this.MinimumSize = new System.Drawing.Size(274, 324);
             this.Name = "Navigation";
-            this.Text = "Form2";
+            this.Text = "LatchApp";
             this.ResumeLayout(false);
             this.PerformLayout();
 

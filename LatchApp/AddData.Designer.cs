@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gbTestAdd = new System.Windows.Forms.GroupBox();
+            this.btnLinkBrowse = new System.Windows.Forms.Button();
             this.tbCommentsTest = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbVideoLinkTest = new System.Windows.Forms.TextBox();
@@ -69,7 +70,6 @@
             this.btnComponentAdd = new System.Windows.Forms.Button();
             this.btnLatchAdd = new System.Windows.Forms.Button();
             this.btnTestAdd = new System.Windows.Forms.Button();
-            this.btnLinkBrowse = new System.Windows.Forms.Button();
             this.gbComponentAdd.SuspendLayout();
             this.gbComponentStatus.SuspendLayout();
             this.gbComponentType.SuspendLayout();
@@ -82,12 +82,15 @@
             // 
             // gbComponentAdd
             // 
+            this.gbComponentAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbComponentAdd.Controls.Add(this.btnComponentAddConfirm);
             this.gbComponentAdd.Controls.Add(this.gbComponentStatus);
             this.gbComponentAdd.Controls.Add(this.gbComponentType);
             this.gbComponentAdd.Controls.Add(this.label2);
             this.gbComponentAdd.Controls.Add(this.label1);
-            this.gbComponentAdd.Location = new System.Drawing.Point(12, 72);
+            this.gbComponentAdd.Location = new System.Drawing.Point(23, 72);
             this.gbComponentAdd.Name = "gbComponentAdd";
             this.gbComponentAdd.Size = new System.Drawing.Size(578, 255);
             this.gbComponentAdd.TabIndex = 4;
@@ -96,6 +99,7 @@
             // 
             // btnComponentAddConfirm
             // 
+            this.btnComponentAddConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnComponentAddConfirm.Location = new System.Drawing.Point(490, 216);
             this.btnComponentAddConfirm.Name = "btnComponentAddConfirm";
             this.btnComponentAddConfirm.Size = new System.Drawing.Size(82, 33);
@@ -200,6 +204,9 @@
             // 
             // gbTestAdd
             // 
+            this.gbTestAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbTestAdd.Controls.Add(this.btnLinkBrowse);
             this.gbTestAdd.Controls.Add(this.tbCommentsTest);
             this.gbTestAdd.Controls.Add(this.label11);
@@ -222,6 +229,16 @@
             this.gbTestAdd.TabIndex = 10;
             this.gbTestAdd.TabStop = false;
             this.gbTestAdd.Text = "Add Test";
+            // 
+            // btnLinkBrowse
+            // 
+            this.btnLinkBrowse.Location = new System.Drawing.Point(429, 139);
+            this.btnLinkBrowse.Name = "btnLinkBrowse";
+            this.btnLinkBrowse.Size = new System.Drawing.Size(71, 25);
+            this.btnLinkBrowse.TabIndex = 21;
+            this.btnLinkBrowse.Text = "Browse";
+            this.btnLinkBrowse.UseVisualStyleBackColor = true;
+            this.btnLinkBrowse.Click += new System.EventHandler(this.BtnAddBrowse_Click);
             // 
             // tbCommentsTest
             // 
@@ -325,6 +342,7 @@
             // 
             // btnTestAddConfirm
             // 
+            this.btnTestAddConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestAddConfirm.Location = new System.Drawing.Point(490, 216);
             this.btnTestAddConfirm.Name = "btnTestAddConfirm";
             this.btnTestAddConfirm.Size = new System.Drawing.Size(82, 33);
@@ -385,12 +403,15 @@
             // 
             // gbLatchAdd
             // 
+            this.gbLatchAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbLatchAdd.Controls.Add(this.btnLatchAddConfirm);
             this.gbLatchAdd.Controls.Add(this.gbLatchTypeAdd);
             this.gbLatchAdd.Controls.Add(this.label4);
             this.gbLatchAdd.Controls.Add(this.label3);
             this.gbLatchAdd.Controls.Add(this.cbComponentID);
-            this.gbLatchAdd.Location = new System.Drawing.Point(17, 72);
+            this.gbLatchAdd.Location = new System.Drawing.Point(23, 72);
             this.gbLatchAdd.Name = "gbLatchAdd";
             this.gbLatchAdd.Size = new System.Drawing.Size(578, 255);
             this.gbLatchAdd.TabIndex = 0;
@@ -399,6 +420,7 @@
             // 
             // btnLatchAddConfirm
             // 
+            this.btnLatchAddConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLatchAddConfirm.Location = new System.Drawing.Point(490, 216);
             this.btnLatchAddConfirm.Name = "btnLatchAddConfirm";
             this.btnLatchAddConfirm.Size = new System.Drawing.Size(82, 33);
@@ -467,6 +489,7 @@
             // 
             // btnFinishAdd
             // 
+            this.btnFinishAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinishAdd.Location = new System.Drawing.Point(528, 333);
             this.btnFinishAdd.Name = "btnFinishAdd";
             this.btnFinishAdd.Size = new System.Drawing.Size(88, 36);
@@ -505,30 +528,21 @@
             this.btnTestAdd.UseVisualStyleBackColor = true;
             this.btnTestAdd.Click += new System.EventHandler(this.btnTestAdd_Click);
             // 
-            // btnLinkBrowse
-            // 
-            this.btnLinkBrowse.Location = new System.Drawing.Point(429, 139);
-            this.btnLinkBrowse.Name = "btnLinkBrowse";
-            this.btnLinkBrowse.Size = new System.Drawing.Size(71, 25);
-            this.btnLinkBrowse.TabIndex = 21;
-            this.btnLinkBrowse.Text = "Browse";
-            this.btnLinkBrowse.UseVisualStyleBackColor = true;
-            this.btnLinkBrowse.Click += new System.EventHandler(this.BtnAddBrowse_Click);
-            // 
             // AddData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 381);
-            this.Controls.Add(this.gbLatchAdd);
-            this.Controls.Add(this.gbTestAdd);
             this.Controls.Add(this.btnTestAdd);
             this.Controls.Add(this.btnLatchAdd);
             this.Controls.Add(this.btnComponentAdd);
             this.Controls.Add(this.btnFinishAdd);
             this.Controls.Add(this.gbComponentAdd);
+            this.Controls.Add(this.gbLatchAdd);
+            this.Controls.Add(this.gbTestAdd);
+            this.MinimumSize = new System.Drawing.Size(578, 428);
             this.Name = "AddData";
-            this.Text = "Form1";
+            this.Text = "LatchApp: AddData";
             this.gbComponentAdd.ResumeLayout(false);
             this.gbComponentAdd.PerformLayout();
             this.gbComponentStatus.ResumeLayout(false);

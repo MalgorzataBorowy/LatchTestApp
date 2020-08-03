@@ -50,6 +50,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(100, 22);
             this.txtPassword.TabIndex = 1;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -110,8 +111,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtLogin);
+            this.MaximumSize = new System.Drawing.Size(274, 324);
+            this.MinimumSize = new System.Drawing.Size(274, 324);
             this.Name = "LoginPanel";
-            this.Text = "Form1";
+            this.Text = "LatchApp";
             this.ResumeLayout(false);
             this.PerformLayout();
 

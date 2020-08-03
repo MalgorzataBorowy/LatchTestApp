@@ -40,6 +40,9 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 107);
             this.dataGridView1.Name = "dataGridView1";
@@ -50,6 +53,7 @@
             // 
             // btnFinishView
             // 
+            this.btnFinishView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinishView.Location = new System.Drawing.Point(528, 333);
             this.btnFinishView.Name = "btnFinishView";
             this.btnFinishView.Size = new System.Drawing.Size(88, 36);
@@ -90,6 +94,7 @@
             // 
             // btnRemoveRow
             // 
+            this.btnRemoveRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveRow.Location = new System.Drawing.Point(12, 333);
             this.btnRemoveRow.Name = "btnRemoveRow";
             this.btnRemoveRow.Size = new System.Drawing.Size(104, 36);
@@ -100,6 +105,7 @@
             // 
             // btnSubmitChanges
             // 
+            this.btnSubmitChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubmitChanges.Location = new System.Drawing.Point(122, 333);
             this.btnSubmitChanges.Name = "btnSubmitChanges";
             this.btnSubmitChanges.Size = new System.Drawing.Size(122, 36);
@@ -120,8 +126,9 @@
             this.Controls.Add(this.btnTestView);
             this.Controls.Add(this.btnFinishView);
             this.Controls.Add(this.dataGridView1);
+            this.MinimumSize = new System.Drawing.Size(442, 255);
             this.Name = "ViewData";
-            this.Text = "Form1";
+            this.Text = "LatchApp: ViewData";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
