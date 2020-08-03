@@ -35,7 +35,7 @@ namespace LatchApp
                             dataGridView1.DataSource = null;
                             DataTable dataTable = new DataTable();
                             dataTable.Load(dataReader);
-                            this.dataGridView1.DataSource = dataTable;
+                            dataGridView1.DataSource = dataTable;
                             dataGridView1.AutoResizeColumns();
                             dataReader.Close();
                             dataGridView1.Columns[0].ReadOnly = true;
@@ -72,7 +72,7 @@ namespace LatchApp
                     {
                         command.ExecuteNonQuery();
                     }
-                    MessageBox.Show("Done");
+                    MessageBox.Show("Row removed");
                 }
                 catch (MySqlException ex)
                 {
@@ -146,10 +146,10 @@ namespace LatchApp
                             testId = oneRow.Cells[0].Value.ToString();
                             latchId = oneRow.Cells[1].Value.ToString();
                             endTime = oneRow.Cells[2].Value.ToString();
-                            date = oneRow.Cells[3].Value.ToString();
+                            date = Convert.ToDateTime(oneRow.Cells[3].Value).ToString("yyyy-MM-dd");
                             status = oneRow.Cells[4].Value.ToString().ToLower();
                             cycles = oneRow.Cells[5].Value.ToString();
-                            videoLink = oneRow.Cells[6].Value.ToString();
+                            videoLink = oneRow.Cells[6].Value.ToString().Replace("\\", "\\\\");
                             comments = oneRow.Cells[7].Value.ToString();
                             queryString = $"UPDATE sql_latch_tests1.tests SET latch_id = {latchId}, end_time = '{endTime}', date = '{date}', status = {status}, cycles = {cycles}, video_link = '{videoLink}', comments = '{comments}' WHERE test_id = {testId};";
                             break;
@@ -184,6 +184,7 @@ namespace LatchApp
                         finally
                         {
                             connection.Close();
+                            ViewDataFromTable(table);
                         }
                     }
                 }

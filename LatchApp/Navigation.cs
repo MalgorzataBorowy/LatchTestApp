@@ -20,18 +20,19 @@ namespace LatchApp
         private void btn_AddData_Click(object sender, EventArgs e)
         {
             Form frm = new AddData();
-            frm.Show();
+            frm.ShowDialog();
         }
 
         private void btn_ViewData_Click(object sender, EventArgs e)
         {
             Form frm = new ViewData();
-            frm.Show();
+            frm.ShowDialog();
         }
 
         private void btn_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
     }
 }

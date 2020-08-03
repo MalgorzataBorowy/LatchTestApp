@@ -124,7 +124,7 @@ namespace LatchApp
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show($"Error\nSQL Message: {ex}");
+                        MessageBox.Show($"{ex.Message}");
                     }
                     finally
                     {
@@ -160,11 +160,11 @@ namespace LatchApp
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show($"Error\nSQL Message: {ex}");
+                        MessageBox.Show($"{ex.Message}");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error: {ex}");
+                        MessageBox.Show($"{ex.Message}");
                     }
                     finally
                     {
@@ -214,11 +214,11 @@ namespace LatchApp
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show($"Error\nSQL Message: {ex}");
+                    MessageBox.Show($"{ex.Message}");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"{ex}");
+                    MessageBox.Show($"{ex.Message}");
                 }
                 finally
                 {
@@ -228,6 +228,28 @@ namespace LatchApp
                 }
 
 
+            }
+        }
+        private void BtnAddBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofdVideoLink = new OpenFileDialog
+            {
+                InitialDirectory = @"E:\",
+                Title = "Browse Video Recordings",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "mp4",
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (ofdVideoLink.ShowDialog()==DialogResult.OK)
+            {
+                tbVideoLinkTest.Text = ofdVideoLink.FileName;
             }
         }
     }

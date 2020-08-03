@@ -69,6 +69,7 @@
             this.btnComponentAdd = new System.Windows.Forms.Button();
             this.btnLatchAdd = new System.Windows.Forms.Button();
             this.btnTestAdd = new System.Windows.Forms.Button();
+            this.btnLinkBrowse = new System.Windows.Forms.Button();
             this.gbComponentAdd.SuspendLayout();
             this.gbComponentStatus.SuspendLayout();
             this.gbComponentType.SuspendLayout();
@@ -86,7 +87,7 @@
             this.gbComponentAdd.Controls.Add(this.gbComponentType);
             this.gbComponentAdd.Controls.Add(this.label2);
             this.gbComponentAdd.Controls.Add(this.label1);
-            this.gbComponentAdd.Location = new System.Drawing.Point(6, 66);
+            this.gbComponentAdd.Location = new System.Drawing.Point(12, 72);
             this.gbComponentAdd.Name = "gbComponentAdd";
             this.gbComponentAdd.Size = new System.Drawing.Size(578, 255);
             this.gbComponentAdd.TabIndex = 4;
@@ -199,6 +200,7 @@
             // 
             // gbTestAdd
             // 
+            this.gbTestAdd.Controls.Add(this.btnLinkBrowse);
             this.gbTestAdd.Controls.Add(this.tbCommentsTest);
             this.gbTestAdd.Controls.Add(this.label11);
             this.gbTestAdd.Controls.Add(this.tbVideoLinkTest);
@@ -214,7 +216,7 @@
             this.gbTestAdd.Controls.Add(this.gbStatusTest);
             this.gbTestAdd.Controls.Add(this.label5);
             this.gbTestAdd.Controls.Add(this.label6);
-            this.gbTestAdd.Location = new System.Drawing.Point(17, 69);
+            this.gbTestAdd.Location = new System.Drawing.Point(23, 72);
             this.gbTestAdd.Name = "gbTestAdd";
             this.gbTestAdd.Size = new System.Drawing.Size(578, 255);
             this.gbTestAdd.TabIndex = 10;
@@ -241,7 +243,7 @@
             // 
             this.tbVideoLinkTest.Location = new System.Drawing.Point(161, 141);
             this.tbVideoLinkTest.Name = "tbVideoLinkTest";
-            this.tbVideoLinkTest.Size = new System.Drawing.Size(303, 22);
+            this.tbVideoLinkTest.Size = new System.Drawing.Size(262, 22);
             this.tbVideoLinkTest.TabIndex = 18;
             // 
             // label10
@@ -388,7 +390,7 @@
             this.gbLatchAdd.Controls.Add(this.label4);
             this.gbLatchAdd.Controls.Add(this.label3);
             this.gbLatchAdd.Controls.Add(this.cbComponentID);
-            this.gbLatchAdd.Location = new System.Drawing.Point(12, 72);
+            this.gbLatchAdd.Location = new System.Drawing.Point(17, 72);
             this.gbLatchAdd.Name = "gbLatchAdd";
             this.gbLatchAdd.Size = new System.Drawing.Size(578, 255);
             this.gbLatchAdd.TabIndex = 0;
@@ -503,18 +505,28 @@
             this.btnTestAdd.UseVisualStyleBackColor = true;
             this.btnTestAdd.Click += new System.EventHandler(this.btnTestAdd_Click);
             // 
+            // btnLinkBrowse
+            // 
+            this.btnLinkBrowse.Location = new System.Drawing.Point(429, 139);
+            this.btnLinkBrowse.Name = "btnLinkBrowse";
+            this.btnLinkBrowse.Size = new System.Drawing.Size(71, 25);
+            this.btnLinkBrowse.TabIndex = 21;
+            this.btnLinkBrowse.Text = "Browse";
+            this.btnLinkBrowse.UseVisualStyleBackColor = true;
+            this.btnLinkBrowse.Click += new System.EventHandler(this.BtnAddBrowse_Click);
+            // 
             // AddData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 381);
-            this.Controls.Add(this.gbComponentAdd);
             this.Controls.Add(this.gbLatchAdd);
             this.Controls.Add(this.gbTestAdd);
             this.Controls.Add(this.btnTestAdd);
             this.Controls.Add(this.btnLatchAdd);
             this.Controls.Add(this.btnComponentAdd);
             this.Controls.Add(this.btnFinishAdd);
+            this.Controls.Add(this.gbComponentAdd);
             this.Name = "AddData";
             this.Text = "Form1";
             this.gbComponentAdd.ResumeLayout(false);
@@ -578,5 +590,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown nudCyclesTest;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnLinkBrowse;
     }
 }

@@ -16,7 +16,8 @@ namespace LatchApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Navigation());
+            Application.Run(new LoginPanel());
+
         }
     }
 }
