@@ -19,50 +19,49 @@ namespace LatchApp
         }
 
         private void BtnConfirmLogin_Click (object sender, EventArgs e)
-        {            
+        {
             using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            using (MySqlCommand command = new MySqlCommand())
             {
-                using (MySqlCommand command = new MySqlCommand())
+                try
                 {
-                    try
+                    if (txtLogin.Text == "" || txtPassword.Text == "")  // if login and password are empty throw an exception
                     {
-                        if (txtLogin.Text == "" || txtPassword.Text == "")
-                        {
-                            throw new Exception("Enter username and password.");
-                        }
-                        command.Connection = connection;
-                        string queryString = $"SELECT username, password FROM login.users WHERE username = @username and password = @password;";
-                        command.CommandText = queryString;
-                        command.Parameters.AddWithValue("username", txtLogin.Text);
-                        command.Parameters.AddWithValue("password", txtPassword.Text);
-                        connection.Open();
-                        MySqlDataReader row = command.ExecuteReader();
-                        if(!row.HasRows)
-                        {
-                            row.Close();
-                            throw new Exception("Data not found");
-                        }
-                        while (row.Read())
-                        {
-                            MessageBox.Show($"Welcome, {row["username"].ToString()}. You are logged in.");
-                        }
+                        throw new Exception("Enter username and password.");
+                    }
+                    command.Connection = connection;
+                    string queryString = $"SELECT username, password FROM login.users WHERE username = @username and password = @password;";
+                    command.CommandText = queryString;
+                    command.Parameters.AddWithValue("username", txtLogin.Text);
+                    command.Parameters.AddWithValue("password", txtPassword.Text);
+                    connection.Open();
+                    MySqlDataReader row = command.ExecuteReader();  // Read row from db table with matching logind and password
+                    if (!row.HasRows)   // if there are not any matching results
+                    {
                         row.Close();
-                        Form frm = new Navigation();
-                        frm.Show();
-                        this.Hide();
+                        throw new Exception("Data not found");
                     }
-                    catch (MySqlException ex)
+                    while (row.Read())  // if there is a match, sent a welcome message
                     {
-                        MessageBox.Show(ex.Message.ToString());
+                        MessageBox.Show($"Welcome, {row["username"].ToString()}. You are logged in.");
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message.ToString());
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
+                    row.Close();
+                    
+                    Form frm = new Navigation();
+                    frm.Show();     // If the user is logged in, open a Navigation form
+                    this.Hide();    // Hide login panel
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }                        
         }

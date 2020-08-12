@@ -18,8 +18,9 @@ namespace LatchApp
             InitializeComponent();
         }
 
-        private string table = "", column = "";
+        private string table = "", column = "";     // strings with table name and name of column with ids
 
+        // Method for filling the DataGridView with db table data
         private void ViewDataFromTable(string table)
         {
             string queryString = $"SELECT * FROM sql_latch_tests1.{table};";
@@ -32,13 +33,14 @@ namespace LatchApp
                         connection.Open();
                         using (MySqlDataReader dataReader = command.ExecuteReader())
                         {
-                            dataGridView1.DataSource = null;
+                            dataGridView1.DataSource = null;    // Ensures that DataGridView columns are in the order as in the db
                             DataTable dataTable = new DataTable();
                             dataTable.Load(dataReader);
                             dataGridView1.DataSource = dataTable;
                             dataGridView1.AutoResizeColumns();
                             dataReader.Close();
-                            dataGridView1.Columns[0].ReadOnly = true;
+
+                            dataGridView1.Columns[0].ReadOnly = true;   // Column with primary keys (ids) in dgv cannot be changed by a user
                         }
                     }
                     catch
@@ -52,6 +54,8 @@ namespace LatchApp
                 }
             }
         }
+
+        // Method for removing selected rows from a table
         private void RemoveRowsFromTable(string table, string column)
         {
             using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
@@ -65,43 +69,49 @@ namespace LatchApp
                         queryString += $"or {column} = {idToRemove} ";
                     }
                 }
-                try
+
+                if(dataGridView1.SelectedRows.Count>0)  // if any rows are selected execute the SQL query
                 {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(queryString, connection))
+                    try
                     {
-                        command.ExecuteNonQuery();
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand(queryString, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                        MessageBox.Show("Rows removed");
                     }
-                    MessageBox.Show("Row removed");
-                }
-                catch (MySqlException ex)
-                {
-                    if (ex.Message.ToLower().Contains("foreign"))
+                    catch (MySqlException ex)
                     {
-                        MessageBox.Show("You have a reference record in other table");
+                        if (ex.Message.ToLower().Contains("foreign"))   // if there are referenced elements to the selected row
+                        {
+                            MessageBox.Show("You have a reference record in other table");
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message.ToString());
+                        }
                     }
-                    else
+                    catch
                     {
-                        MessageBox.Show(ex.Message.ToString());
+                        MessageBox.Show("Error");
+                    }
+                    finally
+                    {
+                        connection.Close();
+                        ViewDataFromTable(table);   // Refresh DataGridView
                     }
                 }
-                catch
-                {
-                    MessageBox.Show("Error");
-                }
-                finally
-                {
-                    connection.Close();
-                    ViewDataFromTable(table);
-                }
+                
             }
         }
 
+        // Show data from selected table in DataGridView
         private void BtnComponentView_Click(object sender, EventArgs e)
         {
             table = "components";
             column = "component_id";
-            ViewDataFromTable(table);
+            ViewDataFromTable(table);   
         }
         private void BtnLatchView_Click(object sender, EventArgs e)
         {
@@ -116,18 +126,25 @@ namespace LatchApp
             column = "test_id";
             ViewDataFromTable(table);
         }
+
+        // Removing selected rows from selected db table
         private void BtnRemoveRow_Click(object sender, EventArgs e)
         {
             RemoveRowsFromTable(table, column);           
         }
+
+        // Introducing changes to db data
         private void BtnSubmitChanges_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow oneRow in dataGridView1.Rows)
             {
+                // If the row is not empty - if there is a value of id
                 if (oneRow.Cells[0].Value != null)
                 {
+                    // Initialization of query parameters
                     string queryString = "", componentId = "", type = "", status = "", latchId = "", testId = "", endTime = "", date = "", cycles = "", videoLink = "", comments = "";
-                    switch(table)
+                    
+                    switch(table)   // Create a SQL query for selected table
                     {
                         case "components":
                             componentId = oneRow.Cells[0].Value.ToString();
@@ -168,10 +185,12 @@ namespace LatchApp
                         }
                         catch (MySqlException ex)
                         {
+                            // Exception - latch assignd to component id that does not exist
                             if (ex.Message.ToString().ToLower().Contains("foreign") && table == "latches")
                             {
                                 MessageBox.Show("Element does not exist.");
                             }
+                            // Exception - multiple tests declared for the same latch
                             else if (ex.Message.ToString().ToLower().Contains("foreign") && table == "tests")
                             {
                                 MessageBox.Show("Latch does not exist or multiple tests for the same latch id.");
@@ -184,14 +203,14 @@ namespace LatchApp
                         finally
                         {
                             connection.Close();
-                            ViewDataFromTable(table);
                         }
                     }
                 }
-
             }
+            ViewDataFromTable(table);   // Refresh the data grid view
         }
 
+        // Close the window
         private void BtnFinishView_Click(object sender, EventArgs e)
         {
             this.Close();

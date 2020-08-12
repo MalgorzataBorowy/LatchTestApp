@@ -70,6 +70,9 @@
             this.btnComponentAdd = new System.Windows.Forms.Button();
             this.btnLatchAdd = new System.Windows.Forms.Button();
             this.btnTestAdd = new System.Windows.Forms.Button();
+            this.btnAddDataCompBrowse = new System.Windows.Forms.Button();
+            this.btnAddDataCompLoad = new System.Windows.Forms.Button();
+            this.txtAddDataCompFile = new System.Windows.Forms.TextBox();
             this.gbComponentAdd.SuspendLayout();
             this.gbComponentStatus.SuspendLayout();
             this.gbComponentType.SuspendLayout();
@@ -85,6 +88,9 @@
             this.gbComponentAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbComponentAdd.Controls.Add(this.txtAddDataCompFile);
+            this.gbComponentAdd.Controls.Add(this.btnAddDataCompLoad);
+            this.gbComponentAdd.Controls.Add(this.btnAddDataCompBrowse);
             this.gbComponentAdd.Controls.Add(this.btnComponentAddConfirm);
             this.gbComponentAdd.Controls.Add(this.gbComponentStatus);
             this.gbComponentAdd.Controls.Add(this.gbComponentType);
@@ -528,6 +534,33 @@
             this.btnTestAdd.UseVisualStyleBackColor = true;
             this.btnTestAdd.Click += new System.EventHandler(this.btnTestAdd_Click);
             // 
+            // btnAddDataCompBrowse
+            // 
+            this.btnAddDataCompBrowse.Location = new System.Drawing.Point(286, 185);
+            this.btnAddDataCompBrowse.Name = "btnAddDataCompBrowse";
+            this.btnAddDataCompBrowse.Size = new System.Drawing.Size(75, 33);
+            this.btnAddDataCompBrowse.TabIndex = 10;
+            this.btnAddDataCompBrowse.Text = "Browse";
+            this.btnAddDataCompBrowse.UseVisualStyleBackColor = true;
+            this.btnAddDataCompBrowse.Click += new System.EventHandler(this.BtnAddFile_Click);
+            // 
+            // btnAddDataCompLoad
+            // 
+            this.btnAddDataCompLoad.Location = new System.Drawing.Point(367, 186);
+            this.btnAddDataCompLoad.Name = "btnAddDataCompLoad";
+            this.btnAddDataCompLoad.Size = new System.Drawing.Size(75, 32);
+            this.btnAddDataCompLoad.TabIndex = 11;
+            this.btnAddDataCompLoad.Text = "Load";
+            this.btnAddDataCompLoad.UseVisualStyleBackColor = true;
+            this.btnAddDataCompLoad.Click += new System.EventHandler(this.BtnAddDataCompLoad_Click);
+            // 
+            // txtAddDataCompFile
+            // 
+            this.txtAddDataCompFile.Location = new System.Drawing.Point(9, 190);
+            this.txtAddDataCompFile.Name = "txtAddDataCompFile";
+            this.txtAddDataCompFile.Size = new System.Drawing.Size(273, 22);
+            this.txtAddDataCompFile.TabIndex = 12;
+            // 
             // AddData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -605,5 +638,8 @@
         private System.Windows.Forms.NumericUpDown nudCyclesTest;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnLinkBrowse;
+        private System.Windows.Forms.TextBox txtAddDataCompFile;
+        private System.Windows.Forms.Button btnAddDataCompLoad;
+        private System.Windows.Forms.Button btnAddDataCompBrowse;
     }
 }
