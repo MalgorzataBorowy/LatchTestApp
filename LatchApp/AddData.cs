@@ -96,14 +96,11 @@ namespace LatchApp
                 ReadOnlyChecked = true,
                 ShowReadOnly = true
             };
-            if (ofdVideoLink.ShowDialog() == DialogResult.OK)
-            {
-                return ofdVideoLink.FileName;
-            }
-            else
-            {
-                return null;
-            }             
+
+            if (ofdVideoLink.ShowDialog() == DialogResult.OK)            
+                return ofdVideoLink.FileName;            
+            else            
+                return null;                        
         }
 
         // Select and show a form (three buttons)
@@ -170,14 +167,12 @@ namespace LatchApp
                 {
                     try
                     {
-                        if (cbComponentID.SelectedIndex == -1) // Check if a list item is selected
-                        {
+                        if (cbComponentID.SelectedIndex == -1) // Check if a list item is selected                        
                             throw new Exception("Select the tested component");
-                        }
-                        if (!rbLatchShort.Checked && !rbLatchLong.Checked) // Check if any RadioButton is checked
-                        {
+                        
+                        if (!rbLatchShort.Checked && !rbLatchLong.Checked) // Check if any RadioButton is checked                        
                             throw new Exception("Select type");
-                        }
+                        
                         connection.Open();
                         command.ExecuteNonQuery();
                         MessageBox.Show("Latch added to db");
