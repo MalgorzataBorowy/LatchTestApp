@@ -11,8 +11,6 @@ using MySql.Data.MySqlClient;
 
 namespace LatchApp
 {
-
-
     public partial class LoginPanel : Form
     {
         public LoginPanel()

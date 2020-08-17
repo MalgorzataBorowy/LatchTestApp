@@ -12,6 +12,22 @@ using System.Collections;
 
 namespace LatchApp
 {
+    /*public class Component
+    {
+        int Id { get; set; }
+        string Type { get; set; }
+        bool Status { get; set; }
+
+        Component() { }
+
+        public Component(int id, string type, bool status)
+        {
+            Id = id;
+            Type = type;
+            Status = status;
+        }
+    }*/
+
     public partial class AddData : Form
     {
         public AddData()
@@ -48,7 +64,7 @@ namespace LatchApp
                 }
             }
         }
-        
+
         // Method for clearing fields in a form
         private void ClearForm(string formName)
         {
@@ -67,7 +83,7 @@ namespace LatchApp
                     cbComponentID.ResetText();  //Clear text field from ComboBox
                     break;
                 case "testAdd":
-                    cbLatchIDTest.ResetText();  
+                    cbLatchIDTest.ResetText();
                     dtpEndTimeTest.Value = DateTime.Now;
                     dtpDateTest.Value = DateTime.Now;
                     rbStatusNotPassedTest.Checked = false;
@@ -76,7 +92,7 @@ namespace LatchApp
                     tbCommentsTest.Clear();
                     nudCyclesTest.Value = 500;
                     break;
-            }            
+            }
         }
 
         // Method for selecting and returning a path to a file
@@ -97,10 +113,10 @@ namespace LatchApp
                 ShowReadOnly = true
             };
 
-            if (ofdVideoLink.ShowDialog() == DialogResult.OK)            
-                return ofdVideoLink.FileName;            
-            else            
-                return null;                        
+            if (ofdVideoLink.ShowDialog() == DialogResult.OK)
+                return ofdVideoLink.FileName;
+            else
+                return null;
         }
 
         // Select and show a form (three buttons)
@@ -142,15 +158,15 @@ namespace LatchApp
                         connection.Open();
                         command.ExecuteNonQuery();
                         MessageBox.Show("Component added to db");
+                        ClearForm("componentAdd");
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show($"{ex.Message}");
+                        MessageBox.Show(ex.Message.ToString());
                     }
                     finally
                     {
                         connection.Close();
-                        ClearForm("componentAdd");
                     }
                 }
             }
@@ -169,10 +185,10 @@ namespace LatchApp
                     {
                         if (cbComponentID.SelectedIndex == -1) // Check if a list item is selected                        
                             throw new Exception("Select the tested component");
-                        
+
                         if (!rbLatchShort.Checked && !rbLatchLong.Checked) // Check if any RadioButton is checked                        
                             throw new Exception("Select type");
-                        
+
                         connection.Open();
                         command.ExecuteNonQuery();
                         MessageBox.Show("Latch added to db");
@@ -180,11 +196,11 @@ namespace LatchApp
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show($"{ex.Message}");
+                        MessageBox.Show(ex.Message.ToString());
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"{ex.Message}");
+                        MessageBox.Show(ex.Message.ToString());
                     }
                     finally
                     {
@@ -198,69 +214,73 @@ namespace LatchApp
         {
             using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
             {
-                MySqlCommand command = new MySqlCommand();
+                //MySqlCommand command = new MySqlCommand();
                 string queryString = "INSERT INTO sql_latch_tests1.tests (`latch_id`,`end_time`,`date`,`status`,`cycles`,`video_link`,`comments`) VALUES (@latch_id, @end_time, @date, @status, @cycles, @video_link, @comments);";
-                command.CommandText = queryString;
-                int status = (rbStatusPassedTest.Checked && !rbStatusNotPassedTest.Checked) ? 1 : 0;
-                command.Parameters.AddWithValue("@latch_id", cbLatchIDTest.SelectedItem);
-                command.Parameters.AddWithValue("@end_time", dtpEndTimeTest.Value);
-                command.Parameters.AddWithValue("date", dtpDateTest.Value);
-                command.Parameters.AddWithValue("@status", status);
-                command.Parameters.AddWithValue("@cycles", nudCyclesTest.Value);
-                command.Parameters.AddWithValue("@video_link", tbVideoLinkTest.Text);
-                command.Parameters.AddWithValue("@comments", tbCommentsTest.Text);
-                command.Connection = connection;
-                try
+                using (MySqlCommand command = new MySqlCommand(queryString, connection))
                 {
-                    if(tbVideoLinkTest.Text == "")  // Check if the TextBox with video link is filled
+                    command.CommandText = queryString;
+                    int status = (rbStatusPassedTest.Checked && !rbStatusNotPassedTest.Checked) ? 1 : 0;
+                    command.Parameters.AddWithValue("@latch_id", cbLatchIDTest.SelectedItem);
+                    command.Parameters.AddWithValue("@end_time", dtpEndTimeTest.Value);
+                    command.Parameters.AddWithValue("date", dtpDateTest.Value);
+                    command.Parameters.AddWithValue("@status", status);
+                    command.Parameters.AddWithValue("@cycles", nudCyclesTest.Value);
+                    command.Parameters.AddWithValue("@video_link", tbVideoLinkTest.Text);
+                    command.Parameters.AddWithValue("@comments", tbCommentsTest.Text);
+                    command.Connection = connection;
+                    try
                     {
-                        throw new Exception("Add a link to video recording");
-                    }
-                    if(cbLatchIDTest.SelectedIndex == -1) // Check if a list item is selected
-                    {
-                        throw new Exception("Select the tested latch");
-                    }
-                    if(!rbStatusPassedTest.Checked && !rbStatusNotPassedTest.Checked) // Check if any RadioButton is checked
-                    {
-                        throw new Exception("Select status");
-                    }
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Test added to db");
-                    ClearForm("testAdd");
+                        if (tbVideoLinkTest.Text == "")  // Check if the TextBox with video link is filled
+                        {
+                            throw new Exception("Add a link to video recording");
+                        }
+                        if (cbLatchIDTest.SelectedIndex == -1) // Check if a list item is selected
+                        {
+                            throw new Exception("Select the tested latch");
+                        }
+                        if (!rbStatusPassedTest.Checked && !rbStatusNotPassedTest.Checked) // Check if any RadioButton is checked
+                        {
+                            throw new Exception("Select status");
+                        }
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Test added to db");
+                        ClearForm("testAdd");
 
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    finally
+                    {
+                        connection.Close();
+                        queryString = $"SELECT latch_id FROM sql_latch_tests1.latches WHERE latch_id NOT IN (SELECT latch_id FROM sql_latch_tests1.tests);";
+                        SetCBIdsList(queryString, cbLatchIDTest, "latch_id");   // Update ComboBox list with latch ids
+                    }
                 }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show($"{ex.Message}");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{ex.Message}");
-                }
-                finally
-                {
-                    connection.Close();
-                    queryString = $"SELECT latch_id FROM sql_latch_tests1.latches WHERE latch_id NOT IN (SELECT latch_id FROM sql_latch_tests1.tests);";
-                    SetCBIdsList(queryString, cbLatchIDTest, "latch_id");   // Update ComboBox list with latch ids
-                }
+
             }
         }
         // Browse for video file
         private void BtnAddBrowse_Click(object sender, EventArgs e)
         {
             string title = "Browse for Video Recordings";
-            tbVideoLinkTest.Text = GetFilePath(title,"mp4");
+            tbVideoLinkTest.Text = GetFilePath(title, "mp4");
         }
 
         // Select file to load component data to db
         private void BtnAddFile_Click(object sender, EventArgs e)
         {
             string title = "Browse for a file to load";
-            txtAddDataCompFile.Text = GetFilePath(title, "csv");            
+            txtAddDataCompFile.Text = GetFilePath(title, "csv");
         }
         // Load component data to db
-        private void BtnAddDataCompLoad_Click(object sender, EventArgs e)
+        /*private void BtnAddDataCompLoad_Click(object sender, EventArgs e)
         {
             using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
             {
@@ -282,8 +302,82 @@ namespace LatchApp
                     }
                 }
             }
-        }
+        }*/
+        private void BtnAddDataCompLoad_Click(object sender, EventArgs e)
+        {
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(txtAddDataCompFile.Text);
+            //int lineCount = 0;
+            /*while ((line = file.ReadLine()) != null)
+            {
+                lineCount++;
+            }*/
 
+            //Component[] components = new Component[lineCount];
+            int i = 0;
+            while ((line = file.ReadLine()) != null)
+            {
+                if (i>0)
+                {
+                    string[] values = line.Split(';');
+                    int id = Int16.Parse(values[0].ToString());
+                    string type = values[1].ToString();
+                    bool status = Convert.ToBoolean(Int16.Parse(values[2].ToString()));
+                    //components[i] = new Component(id, type, status);
+
+                    using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+                    {
+                        string queryString = $"INSERT INTO sql_latch_tests1.components (component_id, type, status) VALUES ({id},'{type}',{status});";
+                        using (MySqlCommand command = new MySqlCommand(queryString, connection))
+                        {
+                            try
+                            {
+                                connection.Open();
+                                command.ExecuteNonQuery();
+                                ClearForm("componentAdd");
+                            }
+                            catch (MySqlException ex)
+                            {
+                                MessageBox.Show(ex.Message.ToString());
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message.ToString());
+                            }
+                            finally
+                            {
+                                connection.Close();
+                            }
+                        }
+                    }
+                }    
+            i++;
+            }
+            MessageBox.Show("Components added to db");
+            file.Close();
+        
+        
+            /*using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            {
+                string queryString = $"LOAD DATA LOCAL INFILE '{txtAddDataCompFile.Text.ToString()}' INTO TABLE sql_latch_tests1.components FIELDS TERMINATED BY ',';";
+                using (MySqlCommand command = new MySqlCommand(queryString, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }*/
+        }
         private void btnFinishAdd_Click(object sender, EventArgs e)
         {
             this.Close();

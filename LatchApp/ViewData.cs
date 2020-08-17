@@ -24,10 +24,9 @@ namespace LatchApp
         private void ViewDataFromTable(string table)
         {
             string queryString = $"SELECT * FROM sql_latch_tests1.{table};";
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
-            {                
-                using (MySqlCommand command = new MySqlCommand(queryString, connection))
-                {
+            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))         
+            using (MySqlCommand command = new MySqlCommand(queryString, connection))
+             {
                     try
                     {
                         connection.Open();
@@ -51,7 +50,6 @@ namespace LatchApp
                     {
                         connection.Close();
                     }
-                }
             }
         }
 
@@ -92,9 +90,9 @@ namespace LatchApp
                             MessageBox.Show(ex.Message.ToString());
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Error");
+                        MessageBox.Show(ex.Message.ToString());
                     }
                     finally
                     {
