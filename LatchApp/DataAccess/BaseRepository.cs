@@ -25,5 +25,13 @@ namespace LatchApp.DataAccess
             ConfirmAdd,
             ConfirmDelete
         }
+        /*public void Add(BaseRepository elementModel) { }
+        public void Update(BaseRepository elementModel) { }
+        public void Delete(BaseRepository elementModel) { }
+        public void DeleteById(int elementModelID) { }
+        public IEnumerable<BaseRepository> GetAll() { return null; }
+        public IEnumerable<int> GetAllIds() { return null; }
+        public IEnumerable<int> GetReferenceIds() { return null; }*/
+
     }
 }

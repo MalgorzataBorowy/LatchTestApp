@@ -50,6 +50,7 @@
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,12 +69,24 @@
     <Compile Include="AddData.Designer.cs">
       <DependentUpon>AddData.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\BaseRepository.cs" />
+    <Compile Include="DataAccess\TestRepository.cs" />
+    <Compile Include="DataAccess\LatchRepository.cs" />
+    <Compile Include="DataAccess\ComponentRepository.cs" />
+    <Compile Include="DataAccess\IElementRepository.cs" />
     <Compile Include="LoginPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginPanel.Designer.cs">
       <DependentUpon>LoginPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\CompModel.cs" />
+    <Compile Include="Model\IComponentModel.cs" />
+    <Compile Include="Model\IModel.cs" />
+    <Compile Include="Model\ITestModel.cs" />
+    <Compile Include="Model\ILatchModel.cs" />
+    <Compile Include="Model\LatchModel.cs" />
+    <Compile Include="Model\TestModel.cs" />
     <Compile Include="ViewData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,5 +147,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

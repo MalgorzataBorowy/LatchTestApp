@@ -7,13 +7,11 @@ using MySql.Data.MySqlClient;
 
 using LatchApp.Model;
 
-namespace LatchApp.DataAccess.Component
+namespace LatchApp.DataAccess
 {
     public class ComponentRepository : BaseRepository, IElementRepository<IComponentModel>
     {
-        public ComponentRepository()
-        {
-        }
+        public ComponentRepository() { }
 
         public ComponentRepository(string connString)
         {
@@ -23,12 +21,12 @@ namespace LatchApp.DataAccess.Component
         public void Add(IComponentModel elementModel)
         {
             string queryString = $"INSERT INTO sql_latch_tests1.components (type, status) VALUES (@type,@status);";
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            using (MySqlConnection connection = new MySqlConnection(_connString))
             using (MySqlCommand command = new MySqlCommand(queryString, connection))
             {
                 try
                 {
-                    command.Prepare();
+                    //command.Prepare();
                     command.Parameters.AddWithValue("@type", elementModel.Type);
                     command.Parameters.AddWithValue("@status", elementModel.Status);
                     connection.Open();
@@ -37,6 +35,7 @@ namespace LatchApp.DataAccess.Component
                 }
                 catch (MySqlException ex)
                 {
+                    throw new Exception(ex.Message.ToString(), ex);
                 }
                 finally
                 {
@@ -65,6 +64,7 @@ namespace LatchApp.DataAccess.Component
                 }
                 catch (MySqlException ex)
                 {
+                    throw new Exception(ex.Message.ToString(), ex);
                 }
                 finally
                 {
@@ -96,20 +96,54 @@ namespace LatchApp.DataAccess.Component
                         
                     }
                 }
-                catch (MySqlException e)
+                catch (MySqlException ex)
                 {
-                    
+                    throw new Exception(ex.Message.ToString(), ex);
                 }
-                finally { connection.Close();}                    
-
-                return componentModelList;
+                finally { connection.Close();}                 
             }
+            return componentModelList;
         }
 
         public void Update(IComponentModel elementModel)
         {
-            
+            string queryString = $"UPDATE sql_latch_tests1.components SET type = @type, status = @status WHERE component_id = @componentId;";
+            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            using (MySqlCommand command = new MySqlCommand(queryString, connection))
+            {
+                try
+                {
+                    command.Prepare();
+                    command.Parameters.AddWithValue("@type", elementModel.Type);
+                    command.Parameters.AddWithValue("@status", elementModel.Status);
+                    command.Parameters.AddWithValue("@componentId", elementModel.ComponentID);
+                    connection.Open();
 
+                    command.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception(ex.Message.ToString(), ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public IEnumerable<int> GetAllIds()
+        {
+            List<int> componentIdsList = new List<int>();
+            foreach(var compModel in GetAll())
+                componentIdsList.Add(compModel.ComponentID);
+            return componentIdsList;
+        }
+
+        public IEnumerable<int> GetReferenceIds()
+        {
+            List<int> componentIdsList = new List<int>();
+            return componentIdsList;
         }
     }
 }

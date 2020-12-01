@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LatchApp.Model
 {
-    interface ITestModel:IModel
+    public interface ITestModel:IModel
     {
+        int TestID { get; set; }
         int LatchID { get; set; }
         DateTime EndTime { get; set; }
         DateTime Date { get; set; }

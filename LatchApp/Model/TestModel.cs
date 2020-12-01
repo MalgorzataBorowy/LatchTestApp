@@ -9,6 +9,8 @@ namespace LatchApp.Model
 {
     class TestModel : ITestModel
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Latch ID is required")]
+        public int TestID { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Latch ID is required")]
         public int LatchID { get; set; }

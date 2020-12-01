@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace LatchApp.DataAccess
 {
-    interface IElementRepository<T>
+    public interface IElementRepository<T>
     {
         void Add(T elementModel);
         void Update(T elementModel);
         void Delete(T elementModel);
         void DeleteById(int elementModelID);
         IEnumerable<T> GetAll();
+        IEnumerable<int> GetAllIds();
+        IEnumerable<int> GetReferenceIds();
     }
 }
