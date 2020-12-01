@@ -151,6 +151,8 @@ namespace LatchApp
             {
                 MessageBox.Show(ex.Message);
             }
+
+            SetCBIdsList(latchRepository.GetReferenceIds(), cbComponentID);
         }
         // Add a test to db table
         private void btnTestAddConfirm_Click(object sender, EventArgs e)
@@ -174,6 +176,7 @@ namespace LatchApp
             {
                 MessageBox.Show(ex.Message);
             }
+            SetCBIdsList(testRepository.GetReferenceIds(), cbLatchIDTest);
         }
         // Browse for video file
         private void BtnAddBrowse_Click(object sender, EventArgs e)

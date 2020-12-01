@@ -53,7 +53,7 @@ namespace LatchApp.DataAccess
         {
             string queryString = $"DELETE FROM sql_latch_tests1.latches WHERE latch_id = {elementModelID} ";
 
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            using (MySqlConnection connection = new MySqlConnection(_connString))
             using (MySqlCommand command = new MySqlCommand(queryString, connection))
             {
                 try
@@ -107,8 +107,8 @@ namespace LatchApp.DataAccess
 
         public void Update(ILatchModel elementModel)
         {
-            string queryString = $"UPDATE sql_latch_tests1.latches SET type = @type, component_id = @component_id WHERE latch_id = @latch_id;";
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            string queryString = "UPDATE sql_latch_tests1.latches SET type = @type, component_id = @component_id WHERE latch_id = @latch_id;";
+            using (MySqlConnection connection = new MySqlConnection(_connString))
             using (MySqlCommand command = new MySqlCommand(queryString, connection))
             {
                 try

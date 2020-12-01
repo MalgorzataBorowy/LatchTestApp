@@ -26,7 +26,6 @@ namespace LatchApp.DataAccess
             {
                 try
                 {
-                    //command.Prepare();
                     command.Parameters.AddWithValue("@type", elementModel.Type);
                     command.Parameters.AddWithValue("@status", elementModel.Status);
                     connection.Open();
@@ -54,7 +53,7 @@ namespace LatchApp.DataAccess
         {
             string queryString = $"DELETE FROM sql_latch_tests1.components WHERE component_id = {elementModelID} ";
 
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            using (MySqlConnection connection = new MySqlConnection(_connString))
             using (MySqlCommand command = new MySqlCommand(queryString, connection))
             {
                 try
@@ -107,13 +106,12 @@ namespace LatchApp.DataAccess
 
         public void Update(IComponentModel elementModel)
         {
-            string queryString = $"UPDATE sql_latch_tests1.components SET type = @type, status = @status WHERE component_id = @componentId;";
-            using (MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.connString))
+            string queryString = "UPDATE sql_latch_tests1.components SET type = @type, status = @status WHERE component_id = @componentId;";
+            using (MySqlConnection connection = new MySqlConnection(_connString))
             using (MySqlCommand command = new MySqlCommand(queryString, connection))
             {
                 try
                 {
-                    command.Prepare();
                     command.Parameters.AddWithValue("@type", elementModel.Type);
                     command.Parameters.AddWithValue("@status", elementModel.Status);
                     command.Parameters.AddWithValue("@componentId", elementModel.ComponentID);
